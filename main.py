@@ -2,8 +2,8 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QRadioButton, QVBoxLayout
 from PyQt5.QtGui import QPainter, QColor
+from U import Ui_Form
 import random
-from PyQt5 import uic  # Импортируем uic
 sys._excepthook = sys.excepthook
 
 
@@ -20,10 +20,10 @@ sys.excepthook = my_exception_hook
 
 
 # Наследуемся от виджета из PyQt5.QtWidgets и от класса с интерфейсом
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -45,7 +45,7 @@ class MyWidget(QMainWindow):
         radius = random.randint(10, 150)
         x = random.randint(10, 250)
         y = random.randint(10, 250)
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(0, 250), random.randint(0, 250), random.randint(0, 250)))
         qp.drawEllipse(x, y, 2 * radius, 2 * radius)
 
 
